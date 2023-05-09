@@ -60,3 +60,23 @@ pipeline {
         }
     }
 }
+stage('Upload to S3') {
+  steps {
+    withAWS(region: 'us-east-1', credentials: 'jenkins-aws-secret-key-id') {
+      // Set S3 bucket name and file path
+      def bucketName = 'jenkins-war-files'
+      def filePath = "${env.WORKSPACE}/**/*.war"
+
+      // Upload file to S3
+      s3Upload(bucket: bucketName, includePathPattern: '**/*.war', gzip: false)
+    }
+  }
+}
+
+stage('AWS Stage') {
+  environment {
+    AWS_ACCESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
+    AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+  }
+}
+
