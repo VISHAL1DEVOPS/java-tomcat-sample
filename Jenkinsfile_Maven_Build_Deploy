@@ -71,6 +71,6 @@ pipeline {
         withAWS(region: 'us-east-1', credentials: [
           [$class: 'EnvironmentVariableCredentialsImpl', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']
         ]) {
-          sh 'aws s3 cp target/*.war s3://jenkins-war-files/*.war'
+          sh 'aws s3 cp target/java-tomcat-maven-example.war s3://jenkins-war-files/java-tomcat-maven-example.war'
         }
 }
