@@ -54,11 +54,6 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            archiveArtifacts artifacts: '**/*.war', fingerprint: true
-        }
-    }
 stage('Upload to S3') {
   steps {
     withAWS(region: 'us-east-1', credentials: 'jenkins-aws-secret-key-id') {
@@ -78,5 +73,10 @@ stage('AWS Stage') {
     AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
   }
 }
+    post {
+        always {
+            archiveArtifacts artifacts: '**/*.war', fingerprint: true
+        }
+    }
 }
 
