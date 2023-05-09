@@ -59,4 +59,18 @@ pipeline {
             archiveArtifacts artifacts: '**/*.war', fingerprint: true
         }
     }
+    stages {
+    stage('Build') {
+      steps {
+        sh 'mvn clean install'
+      }
+    }
+
+    stage('Upload to S3') {
+      steps {
+        withAWS(region: 'us-east-1', credentials: [
+          [$class: 'EnvironmentVariableCredentialsImpl', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']
+        ]) {
+          sh 'aws s3 cp target/*.war s3://jenkins-war-files/*.war'
+        }
 }
