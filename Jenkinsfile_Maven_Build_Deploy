@@ -49,7 +49,7 @@ pipeline {
                 environment name: 'SDLC_ENV', value: 'prod'
             }
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcat_login_info', path: '', url: 'http://172.31.92.139:8080/')], contextPath: 'prod-jenkins-files-tomcat-run', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcat_login_info', path: '', url: 'http://172.31.46.235:8080/')], contextPath: 'prod-jenkins-files-tomcat-run', war: '**/*.war'
             }
         }
     }
