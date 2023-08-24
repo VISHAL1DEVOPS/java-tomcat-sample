@@ -41,7 +41,7 @@ pipeline {
                 environment name: 'SDLC_ENV', value: 'qa'
             }
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcat_login_info', path: '', url: 'http://172.31.92.136:8080/')], contextPath: 'qa-jenkins-files-tomcat-run', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcat_login_info', path: '', url: 'http://172.31.91.242:8080/')], contextPath: 'qa-jenkins-files-tomcat-run', war: '**/*.war'
             }
         }
         stage('DeployToProd') {
